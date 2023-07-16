@@ -73,15 +73,7 @@ import 'item_list_example/item_provider_page.dart';
 // for item list example
 
 void main() {
-  runApp(
-      MultiProvider(
-          providers:[
-            ChangeNotifierProvider(
-                create: (_) =>   ItemProviderPage()),
-          ],
-        child: const MyApp(),
-      ),
-  );
+  runApp(const MyApp());
 }
 
 
@@ -90,12 +82,21 @@ class MyApp extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return  MaterialApp(
-      theme: ThemeData(
-        primarySwatch: Colors.blueGrey
+    return  MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => DataClass()),
+        ChangeNotifierProvider(create: (context) => ChangeCourse()),
+        ChangeNotifierProvider(create: (context) => DataClass2()),
+        ChangeNotifierProvider(create: (context) => DataClass3()),
+        ChangeNotifierProvider(create: (context) => ItemProviderPage()),
+      ],
+      child: MaterialApp(
+        theme: ThemeData(
+            primarySwatch: Colors.blueGrey
+        ),
+        debugShowCheckedModeBanner: false,
+        home: const ItemListPage(),
       ),
-          debugShowCheckedModeBanner: false,
-          home: const ItemListPage(),
-      );
+    );
   }
 }
